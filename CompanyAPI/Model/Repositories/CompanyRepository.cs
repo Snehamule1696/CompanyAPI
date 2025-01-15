@@ -3,6 +3,7 @@ using CompanyAPI.Data;
 using CompanyAPI.Model.Domain;
 using CompanyAPI.Model.DTO;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CompanyAPI.Model.Repositories
@@ -28,8 +29,8 @@ namespace CompanyAPI.Model.Repositories
                 Name=r.Name,
                 Location=r.Location
             }).ToList();
-
-            return (recordDtos);
+            var companyDataList = mapper.Map<List<CompanyDTO>>(recordDtos);
+            return companyDataList;
         }
         public async Task<CompanyDTO> GetCompanyByIDAsync(int id)
         {
@@ -48,8 +49,8 @@ namespace CompanyAPI.Model.Repositories
                 Name = record.Name,
                 Location = record.Location
             };
-
-            return recordDto;  // Return the DTO
+            var companyData = mapper.Map<CompanyDTO>(recordDto);//Mapper
+            return (companyData);
         }
         public async Task<CompanyDTO> CreateCompanyAsync(Company company)
         {
