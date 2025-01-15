@@ -29,7 +29,7 @@ namespace CompanyAPI.Controllers
             return companyData;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<CompanyDTO>> GetUserById(int id)
+        public async Task<ActionResult<CompanyDTO>> GetCompanyById(int id)
         {
             var recordDto = await companyRepository.GetCompanyByIDAsync(id);
 
@@ -41,7 +41,7 @@ namespace CompanyAPI.Controllers
             return Ok(recordDto); 
         }
         [HttpPost]
-        public async Task<ActionResult<CompanyDTO>> CreateUserAsync(Company company)
+        public async Task<ActionResult<CompanyDTO>> CreateCompanyAsync(Company company)
         {
             var createdRecord = await companyRepository.CreateCompanyAsync(company);
 
@@ -57,7 +57,7 @@ namespace CompanyAPI.Controllers
 
        
         [HttpPut("{id}")]
-        public async Task<ActionResult<CompanyDTO>> UpdateUserAsync(int id, Company company)
+        public async Task<ActionResult<CompanyDTO>> UpdateCompanyAsync(int id, Company company)
         {
             var updatedRecord = await companyRepository.UpdateCompanyAsync(id, company);
 
@@ -71,7 +71,7 @@ namespace CompanyAPI.Controllers
 
   
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUserAsync(int id)
+        public async Task<ActionResult> DeleteCompanyAsync(int id)
         {
             var result = await companyRepository.DeleteCompanyAsync(id);
 
