@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddDbContext<CompanyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CompanyConnection")));
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));

@@ -19,15 +19,16 @@ namespace CompanyAPI.Model.Repositories
 
         public async Task<List<DepartmentDTO>> GetDepartmentDetailsAsync()
         {
-           var recordsCompany = await context.Departments.Include(r => r.CompanyId)  
-                                 .ToListAsync();
-            var recordDtos = recordsCompany.Select(r => new DepartmentDTO
-            {
-                Id = r.Id,
-                Name = r.Name,
-                CompanyId =r.CompanyId
-            }).ToList();
-            var departmentDataList = mapper.Map<List<DepartmentDTO>>(recordDtos);
+           var recordsCompany = await context.Departments.ToListAsync();
+          //var recordsCompany = await context.Departments.Include(r => r.CompanyId)  
+          //                       .ToListAsync();
+            //var recordDtos = recordsCompany.Select(r => new DepartmentDTO
+            //{
+            //    Id = r.Id,
+            //    Name = r.Name,
+            //    CompanyId =r.CompanyId
+            //}).ToList();
+            var departmentDataList = mapper.Map<List<DepartmentDTO>>(recordsCompany);
             return departmentDataList;
         }
         public async Task<DepartmentDTO> GetDepartmentByIDAsync(int id)
@@ -41,6 +42,38 @@ namespace CompanyAPI.Model.Repositories
             }
 
             // Map the retrieved record to a DTO
+            var recordDto = new DepartmentDTO
+            {
+                Id = record.Id,
+                Name = record.Name,
+                CompanyId = record.CompanyId
+            };
+            var departmentData = mapper.Map<DepartmentDTO>(recordDto);//Mapper
+            return (departmentData);
+        }
+        public async Task<DepartmentDTO> GetByCompanyIdAsync(int companyId)
+        {
+            var record = await context.Departments
+                              .FirstOrDefaultAsync(x => x.CompanyId == companyId);
+
+            if (record == null)
+            {
+                return null;  // Or throw an exception if you prefer
+            }
+
+            // Map the retrieved record to a DTO
+            var recordDto = new DepartmentDTO
+            {
+                Id = record.Id,
+                Name = record.Name,
+                CompanyId = record.CompanyId
+            };
+            var departmentData = mapper.Map<DepartmentDTO>(recordDto);//Mapper
+            return (departmentData);
+        }
+        public async Task<DepartmentDTO> GetDepartmentByNameAsync(string name)
+        {
+            var record = await context.Departments.FirstOrDefaultAsync(c => c.Name == name);
             var recordDto = new DepartmentDTO
             {
                 Id = record.Id,

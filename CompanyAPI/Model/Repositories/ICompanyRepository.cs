@@ -10,5 +10,6 @@ namespace CompanyAPI.Model.Repositories
         Task<CompanyDTO> CreateCompanyAsync(Company company);
         Task<CompanyDTO> UpdateCompanyAsync(int id, Company company);
         Task<bool> DeleteCompanyAsync(int id);
+        Task<CompanyDTO> GetCompanyByNameAsync(string name);
     }
 }

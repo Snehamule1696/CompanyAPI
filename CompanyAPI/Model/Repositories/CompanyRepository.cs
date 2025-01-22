@@ -39,10 +39,22 @@ namespace CompanyAPI.Model.Repositories
 
             if (record == null)
             {
-                return null;  // Or throw an exception if you prefer
+                return null;
             }
 
             // Map the retrieved record to a DTO
+            var recordDto = new CompanyDTO
+            {
+                Id = record.Id,
+                Name = record.Name,
+                Location = record.Location
+            };
+            var companyData = mapper.Map<CompanyDTO>(recordDto);//Mapper
+            return (companyData);
+        }
+        public async Task<CompanyDTO> GetCompanyByNameAsync(string name)
+        {
+            var record= await context.Companies.FirstOrDefaultAsync(c => c.Name == name);
             var recordDto = new CompanyDTO
             {
                 Id = record.Id,

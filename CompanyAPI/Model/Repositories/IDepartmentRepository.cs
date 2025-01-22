@@ -10,5 +10,7 @@ namespace CompanyAPI.Model.Repositories
         Task<DepartmentDTO> CreateDepartmentAsync(Department department);
         Task<DepartmentDTO> UpdateDepartmentAsync(int id, Department department);
         Task<bool> DeleteDepartmentAsync(int id);
+        Task<DepartmentDTO> GetDepartmentByNameAsync(string name);
+        Task<DepartmentDTO> GetByCompanyIdAsync(int companyId);
     }
 }

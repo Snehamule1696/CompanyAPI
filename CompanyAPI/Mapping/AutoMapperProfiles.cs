@@ -9,6 +9,7 @@ namespace CompanyAPI.Mapping
         public AutoMapperProfiles()
         {
             CreateMap<Company,CompanyDTO>().ReverseMap();
+            CreateMap<Department, DepartmentDTO>().ReverseMap();
         }
     }
 }
